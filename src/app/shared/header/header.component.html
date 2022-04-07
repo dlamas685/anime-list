@@ -1,0 +1,25 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-start">
+                <img src="../../../assets/img/esferas.png" title="Logotipo" alt="Logotipo" class="img-fluid girar">
+                <span class="fs-4 ms-3 text-light text-logo">Anime List</span>
+            </div>
+            <div class="d-flex justify-content-end align-items-center py-3">
+                <a [routerLink]="['/home','id']" class="nav-link enlace"><i class="fa-solid fa-house"></i> Inicio</a>
+                <a [routerLink]="['/favorites','id']" class="nav-link enlace"><i class="fa-solid fa-bookmark"></i>
+                    Favoritos</a>
+                <div class="dropdown">
+                    <a class="nav-link enlace" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-user"></i> Usuario
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item py-2 fs-6" href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                        <li><a class="dropdown-item py-2 fs-6" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,25 @@
+<form class="filters container-sm bg-light float-left" (ngSubmit)="filtrarAnime()" [formGroup]="miFiltros">
+    <div class="f-search">
+        <span>Buscar:</span>
+        <div class="f-input-group">
+            <i class="fa-solid fa-magnifying-glass icon-input bg-white"></i><input type="text" placeholder="Buscar..." name="buscador" formControlName="search">
+        </div>
+    </div>
+    <div class="f-dropdown">
+        <span>Genero:</span>
+        <select name="dropdown" formControlName="genre">
+            <option value="---">---</option>
+            <option *ngFor="let genre of genders;" [value]="genre">{{genre}}</option>
+        </select>
+    </div>
+    <div class="f-dropdown">
+        <span>Año:</span>
+        <select name="dropdown" formControlName="year">
+            <option value="---">---</option>
+            <option *ngFor="let year of years;" [value]="year">{{year}}</option>
+        </select>
+    </div>
+    <div class="f-send">
+        <button type="submit" class="btn btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+    </div>
+</form>

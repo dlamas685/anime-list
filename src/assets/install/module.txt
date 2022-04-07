@@ -1,0 +1,15 @@
+npm install
+
+
+FONTAWESOME
+
+
+ng add @fortawesome/angular-fontawesome@<version>
+npm install @fortawesome/angular-fontawesome@
+
+
+APOLLO
+
+ng add apollo-angular
+
+npm install apollo-angular @apollo/client graphql

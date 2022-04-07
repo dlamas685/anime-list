@@ -1,0 +1,23 @@
+<aside class="bg-light">
+    <div class="popular bg-white shadow-sm rounded animate__animated animate__fadeIn animate__fast">
+        <h3 class="p-titulo fs-5">Animes Populares</h3>
+        <ul>
+            <li *ngFor="let popular of populares$ | async; let i=index">
+                <i class="fa-solid fa-star text-warning fs-6"></i>
+                <a [routerLink]="['/anime', popular.id]"> {{popular.title.romaji | titlecase}} </a>
+            </li>
+        </ul>
+    </div>
+    <div class="visited bg-white shadow-sm rounded animate__animated animate__fadeIn animate__fast" *ngIf="historial.length != 0">
+        <h3 class="v-titulo fs-5">Ultimos Filtros</h3>
+        <ul>
+            <li *ngFor="let item of historial" class="animate__animated animate__fadeIn animate__fast" >
+                <a (click)="reSearch(item)">
+                    <span *ngIf="item.title"><i class="fa-solid fa-heading fa-icon"></i> {{item.title}}   </span>
+                    <span *ngIf="item.genre"><i class="fa-solid fa-tag fa-icon"></i> {{item.genre}}   </span>
+                    <span *ngIf="item.seasonYear"><i class="fa-solid fa-calendar-check fa-icon"></i> {{item.seasonYear}} </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>

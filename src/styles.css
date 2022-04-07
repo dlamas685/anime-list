@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+	font-family: "Roboto";
+	src: url("./assets/fonts/Roboto/Roboto-Regular.ttf");
+  }
+
+  @font-face {
+	font-family: "Road Rage";
+	src: url("./assets/fonts/Road-Rage.otf");
+  }
+
+  @font-face {
+	font-family: "Chantelli Antiqua";
+	src: url("./assets/fonts/Chantelli_Antiqua.ttf");
+  }
+
+  
+  @font-face {
+	font-family: "Overpass";
+	src: url("./assets/fonts/Overpasss/Overpass-Regular.ttf");
+  }
+
+
+  
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	background: #4a465b;
+}
+
+.contenedor {
+	width: 90%;
+	max-width: 1000px;
+	margin: 20px auto;
+	overflow: hidden;
+}
