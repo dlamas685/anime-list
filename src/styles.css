@@ -28,15 +28,86 @@
 	
 }
 
-body {
-	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
-	background: #4a465b;
+html{
+	scroll-behavior: smooth;
 }
 
-.contenedor {
-	width: 90%;
-	max-width: 1000px;
-	margin: 20px auto;
-	overflow: hidden;
+body {
+	font-family: 'Overpass', sans-serif;
+	font-size: 16px;
+	background: #f8f9fa;
+	overflow: auto;
 }
+
+
+body::-webkit-scrollbar {
+	-webkit-appearance: none;
+}
+
+body::-webkit-scrollbar:vertical{
+	width:6px;
+}
+
+body::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background: #ccc;
+}
+
+.bg-romance {
+  background: rgb(249, 148, 133);
+}
+
+.bg-music {
+	background: crimson;
+}
+
+.bg-slice-of-life {
+	background:beige ;
+	color:rgb(39, 38, 38);
+}
+
+.bg-ecchi {
+	background:lightcoral ;
+}
+
+.bg-drama {
+	background:#f8f9fa;
+	color: #000;
+}
+
+.bg-sports {
+	background:gold ;
+}
+
+.bg-supernatural {
+	background:lightgray ;
+	color:black;
+}
+
+.bg-thriller {
+	background: rgb(113, 65, 25);
+}
+
+.bg-mystery {
+	background: chocolate;
+}
+
+
+.bg-mahou-shoujo {
+	background: violet;
+}
+
+.bg-sci-fi {
+	background: aqua;
+}
+
+.bg-mecha {
+	background:cornflowerblue ;
+}
+
+.bg-horror {
+	background: darkslategray;
+}
+
+
+

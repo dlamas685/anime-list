@@ -1,25 +1,30 @@
-<form class="filters container-sm bg-light float-left" (ngSubmit)="filtrarAnime()" [formGroup]="miFiltros">
+<form class="filters container-sm bg-light float-left" (ngSubmit)="filterAnime()" [formGroup]="myFilters">
     <div class="f-search">
         <span>Buscar:</span>
         <div class="f-input-group">
-            <i class="fa-solid fa-magnifying-glass icon-input bg-white"></i><input type="text" placeholder="Buscar..." name="buscador" formControlName="search">
+            <i class="fa-solid fa-magnifying-glass icon-input bg-white"></i><input type="text" placeholder="Buscar..." name="buscador" (keypress)="filterAnime()" formControlName="title">
         </div>
     </div>
     <div class="f-dropdown">
         <span>Genero:</span>
-        <select name="dropdown" formControlName="genre">
-            <option value="---">---</option>
+        <select name="dropdown-genre" formControlName="genre" (change)="filterAnime()">
             <option *ngFor="let genre of genders;" [value]="genre">{{genre}}</option>
         </select>
     </div>
     <div class="f-dropdown">
         <span>Año:</span>
-        <select name="dropdown" formControlName="year">
-            <option value="---">---</option>
+        <select name="dropdown-seasonYear" formControlName="seasonYear" (change)="filterAnime()">
             <option *ngFor="let year of years;" [value]="year">{{year}}</option>
         </select>
     </div>
-    <div class="f-send">
-        <button type="submit" class="btn btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+
+    <div class="f-dropdown">
+        <span>Formato:</span>
+        <select name="dropdown-format" formControlName="format" (change)="filterAnime()">
+            <option *ngFor="let format of formats;" [value]="format | uppercase" [innerHTML]="format.replace('_',' ')"></option>
+        </select>
     </div>
+    <!-- <div class="f-send">
+        <button type="submit" class="button btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+    </div> -->
 </form>

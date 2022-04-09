@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Media } from '../../interfaces/anime';
 import { AnimeService } from '../../service/anime.service';
+import { LocalStorageService } from '../../service/local-storage.service';
 
 @Component({
   selector: 'app-anime-favorites',
@@ -11,18 +13,18 @@ export class AnimeFavoritesComponent implements OnInit {
 
   p: number = 1;
   
-  constructor(private animeService: AnimeService){}
+  constructor(private localStorageSvc:LocalStorageService ){}
 
   ngOnInit() {
     
   }
 
-  get favoritos():Media[] {
-    return this.animeService.favoritos;
+  get animesFavorites$():Observable<Media[]> {
+    return this.localStorageSvc.animesFavorites$;
   }
 
-  removerFavorito(favorito:Media):void{
-    this.animeService.agregarFavorito(favorito);
+  public removeAnimeFavorite(anime:Media): void {
+    this.localStorageSvc.addOrRemoveFevorite(anime);
   }
 
 }

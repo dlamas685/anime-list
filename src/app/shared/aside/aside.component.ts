@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AnimeService } from '../../anime/service/anime.service';
 import { Filter, Media } from '../../anime/interfaces/anime';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from 'src/app/anime/service/local-storage.service';
 
 @Component({
   selector: 'app-aside',
@@ -10,25 +11,17 @@ import { Observable } from 'rxjs';
 })
 export class AsideComponent implements OnInit {
 
-
-  constructor(private animeService: AnimeService){
-        
-  }
+  constructor(private animeSvc: AnimeService, private localStorageSvc: LocalStorageService){}
   
   ngOnInit() {
-      this.animeService.filtrarCincoAnimes();
+      this.animeSvc.getTopAnimes();
   }
   
   get populares$(): Observable<Media[]> {
-      return this.animeService.populares$;
-  }
-  get historial():Filter[]{
-      return this.animeService.historial;
+      return this.animeSvc.populares$;
   }
 
-  reSearch(search:Filter):void{
-      this.animeService.establecerParametros(search);
-      this.animeService.filtrarAnimes();
+  get visited$(): Observable<Media[]> {
+    return this.localStorageSvc.visited$;
   }
-
 }

@@ -1,18 +1,14 @@
-<section class="main bg-light">
-    <div *ngIf="(resultado$ | async)?.length; else elseBlock">
+<section class="main bg-light" infiniteScroll (scrolled)="onScrollDown()">
+    <div *ngIf="(animes$ | async)?.length; else elseBlock">
         <h2 class="section-tittle">Resultados de la busqueda</h2>
-        <section class="results" name="results" *ngIf="(resultado$ | async) as resultado">
-            <article *ngFor="let anime of resultado | paginate: { itemsPerPage: 12, currentPage: p }">
-                <a [routerLink]="['/detail', anime.id]">
+        <section class="results" name="results" *ngIf="(animes$ | async) as animes">
+            <article *ngFor="let anime of animes">
+                <a [routerLink]="['/detail', anime.id]" (click)="addToVisited(anime)">
                     <img src="{{anime.coverImage.extraLarge}}" class="animate__animated animate__fadeIn animate__slow shadow-lg rounded"
                         alt="Portada del anime" tittle="Portada">
                 </a>
                 <h3 class="animate__animated animate__bounceIn animate__fast text-secondary fs-6 fw-normal">{{anime.title.romaji | titlecase}} </h3>
             </article>
-            <div class="p-controls">
-                <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Suguiente">
-                </pagination-controls>
-            </div>
         </section>
     </div>
     <ng-template #elseBlock>

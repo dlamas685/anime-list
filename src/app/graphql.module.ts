@@ -7,7 +7,16 @@ const uri = 'https://graphql.anilist.co'; // <-- add the URL of the GraphQL serv
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
     link: httpLink.create({uri}),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies:{
+        MediaTitle: {
+          keyFields:["romaji"],
+        },
+        MediaCoverImage: {
+          keyFields: ["extraLarge"],
+        }
+      }
+    }),
   };
 }
 

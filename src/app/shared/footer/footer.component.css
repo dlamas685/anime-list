@@ -3,7 +3,14 @@ footer {
 	width: 100%;
 	background:#161f26;
 	color: #fff;
+	display:flex;
+	justify-content: center;
+	align-items:center;
 	padding: 15px 0;
+}
+
+p {
+	display: flex;
 	text-align: center;
 }
 

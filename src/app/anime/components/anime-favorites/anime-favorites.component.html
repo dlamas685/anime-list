@@ -1,17 +1,17 @@
-<section class="main animate__animated animate__slideInUp shadow-sm rounded">
-    <div *ngIf="favoritos.length > 0; else elseBlock">
+<section class="main animate__animated animate__slideInUp shadow-sm rounded" >
+    <div *ngIf="(animesFavorites$ | async) as animesFavorites; else elseBlock">
         <h2 class="section-tittle fs-5 fw-normal">Animes Favoritos</h2>
         <section class="results-favorites">
-            <article *ngFor="let favorito of favoritos | paginate: { itemsPerPage: 2, currentPage: p }">
+            <article *ngFor="let anime of animesFavorites | paginate: { itemsPerPage: 2, currentPage: p }">
                 <div class="article-image">
-                    <img [src]="favorito.coverImage.extraLarge" class="shadow-lg rounded" alt="Portada del anime" title="Portada">
+                    <img [src]="anime.coverImage.extraLarge" class="shadow-lg rounded" alt="Portada del anime" title="Portada">
                 </div>
                 <div class="article-info-anime">
-                    <h3>{{favorito.title.romaji}}</h3>
-                    <p [innerHTML]= "favorito.description"></p>
+                    <h3>{{anime.title.romaji}}</h3>
+                    <p [innerHTML]= "anime.description"></p>
                     <div class="btn-group-favorites">
-                        <button type="button" class="b-f btn-see-more" [routerLink]="['/anime', favorito.id]"><i class="fa-solid fa-circle-plus"></i> Ver más</button>
-                        <button type="button" class="b-f btn-remove" (click)="removerFavorito(favorito)"><i class="fa-solid fa-trash"></i> Remover</button>
+                        <button type="button" class="btn btn-outline-dark fs-6 mx-2" [routerLink]="['/detail', anime.id]"><i class="bi bi-plus-circle-dotted"></i></button>
+                        <button type="button" class="btn btn-outline-danger fs-6" (click)="removeAnimeFavorite(anime)"><i class="bi bi-trash3-fill"></i> </button>
                     </div>
                 </div>
             </article>

@@ -1,113 +1,56 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, pluck, take, tap, withLatestFrom, of } from 'rxjs';
 import { Data, Filter, Media } from '../interfaces/anime';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnimeService {
 
-  
-  private animesFiltradosSubject = new BehaviorSubject<Media[]>([]);
+  private animesSubject = new BehaviorSubject<Media[]>([]);
 
   private popularesSubject = new BehaviorSubject<Media[]>([]);
 
-  private _animesFiltrados$ = this.animesFiltradosSubject.asObservable();
+  private animeSubject = new BehaviorSubject<Media>(null!);
+
+  private _animes$ = this.animesSubject.asObservable();
 
   private _populares$ = this.popularesSubject.asObservable();
 
-  private _historial:Filter[] = [];
+  private _anime$ = this.animeSubject.asObservable();
 
-  private _favoritos:Media[] = [];
+  private _filter:Filter = {};
 
-  private parameters:string = "";
-
-  constructor(private apollo: Apollo) { 
-      
-      this._historial = JSON.parse(localStorage.getItem('historial')!) || [];
-
-      this._favoritos = JSON.parse(localStorage.getItem('favoritos')!) || [];
-
-  }
-
-  get historial(){
-    return [...this._historial.slice(0,5)];
-  }
-
-  get favoritos():Media[] {
-    return [...this._favoritos];
-  }
-
-  get animesFiltrados$(): Observable<Media[]> {
-    return this._animesFiltrados$;
+  get animes$(): Observable<Media[]> {
+    return this._animes$;
   }
 
   get populares$(): Observable<Media[]> {
     return this._populares$;
   }
 
-  agregarFavorito(anime:Media): void {
-    if(!this._favoritos.includes(anime)){
-      this._favoritos.unshift(anime);
-      localStorage.setItem('favoritos', JSON.stringify(this._favoritos));
-    }
-    else {
-      this._favoritos = this._favoritos.filter(function(item) {
-        return item!== anime; 
-      });
-      localStorage.setItem('favoritos', JSON.stringify(this._favoritos));
-    }
+  get anime$(): Observable<Media>{
+    return this._anime$;
   }
 
+  constructor(private apollo: Apollo, private localStorageSvc: LocalStorageService) {}
 
-  establecerHistorial(busqueda:Filter):void {
-    if(!this._historial.includes(busqueda)){
-      this._historial.unshift(busqueda);
-      localStorage.setItem('historial', JSON.stringify(this._historial));
-    }
-  }
-
-  establecerParametros(filter: Filter):void {
-      let search:string = "";
-      let genre:string = "";
-      let seasonYear:string = "";
-      let type:string = "";
-      if (filter.title !== undefined) {
-        search = `search:"${filter.title}"`;
-      }
-      if (filter.genre !== undefined) {
-        genre = `genre:"${filter.genre}"`;
-      }
-      if(filter.seasonYear !== undefined) {
-        seasonYear = `seasonYear:${filter.seasonYear}`;
-      }
-      if (filter.type !== undefined) {
-        type = `type: ${filter.type}`;
-      }
-      this.parameters= search + " " + genre + " " + seasonYear + " " + type + " sort:POPULARITY_DESC";
-
-  }
-
-  filtrarAnimesPupolares(){
+  public getAnimesPopular(){
     const QUERY = gql`
     {
-      Page (perPage:50) {
+      Page (page:1 perPage:8) {
         media ( type: ANIME sort:POPULARITY_DESC) {
           id
           title {
             romaji
             userPreferred
           }
-          genres
-          seasonYear
           coverImage {
             extraLarge
             large
           }
-          popularity
-          status
-          isAdult
         }
       }
     }
@@ -119,25 +62,29 @@ export class AnimeService {
       take(1),
       tap(({ data }) => {
         const { Page } = data;
-        // this._animesFiltrados = Page.media;
-        this.animesFiltradosSubject.next(Page.media);
+        this.animesSubject.next(Page.media);
       })
     ).subscribe();
     
   }
 
-  filtrarAnimes(): void {
-
-    const QUERY = gql`
-    {
-      Page (perPage:50) {
-        media (${this.parameters}) {
+  public getAnimePerPage(pageNum:number):void {
+    const QUERY = gql` 
+    query ($page: Int, $perPage: Int, $search: String, $genre: String, $seasonYear: Int, $format:MediaFormat, $type: MediaType) {
+      Page (page: $page, perPage: $perPage) {
+        pageInfo {
+          total
+          currentPage
+          lastPage
+          hasNextPage
+          perPage
+        }
+        media (search: $search, genre: $genre, seasonYear: $seasonYear, format: $format, type: $type, sort:POPULARITY_DESC) {
           id
           title {
             romaji
-            userPreferred
           }
-          coverImage {
+          coverImage{
             extraLarge
             large
           }
@@ -145,22 +92,80 @@ export class AnimeService {
       }
     }
     `;
-
-    this.apollo.watchQuery<Data>({
-      query: QUERY
+    let VARIABLES = {
+      page:pageNum,
+      perPage:8,
+      search: this._filter.title,
+      genre: this._filter.genre,
+      seasonYear: this._filter.seasonYear,
+      format: this._filter.format,
+      type: this._filter.type
+    }
+    this.apollo.watchQuery<any>({
+      query:QUERY,
+      variables:VARIABLES
     }).valueChanges.pipe(
       take(1),
-      tap(({ data }) => {
-        const { Page } = data;
-        this.animesFiltradosSubject.next(Page.media); 
+      pluck('data', 'Page', 'media'),
+      withLatestFrom(this._animes$),
+      tap(([apiResponse, media]) => {
+        this.animesSubject.next([...media, ...apiResponse]);
       })
     ).subscribe();
   }
 
-  filtrarCincoAnimes():void {
+  public getAnimes(filter:Filter): void {
+
+    this._filter = filter;
+
+    let QUERY = gql`
+    query ($page: Int, $perPage: Int, $search: String, $genre: String, $seasonYear: Int, $format:MediaFormat, $type: MediaType) {
+      Page (page: $page, perPage: $perPage) {
+        pageInfo {
+          total
+          currentPage
+          lastPage
+          hasNextPage
+          perPage
+        }
+        media (search: $search, genre: $genre, seasonYear: $seasonYear, format: $format, type: $type, sort:POPULARITY_DESC) {
+          id
+          title {
+            romaji
+          }
+          coverImage{
+            extraLarge
+            large
+          }
+        }
+      }
+    }  
+    `;
+    let VARIABLES = {
+      page:1,
+      perPage:8,
+      search: filter.title,
+      genre: filter.genre,
+      seasonYear: filter.seasonYear,
+      format: filter.format,
+      type: filter.type
+    }
+    this.apollo.watchQuery<Data>({
+      query: QUERY,
+      variables:VARIABLES
+    }).valueChanges.pipe(
+      take(1),
+      tap(({ data }) => {
+        const { Page } = data;
+        this.animesSubject.next(Page.media); 
+      })
+    ).subscribe();
+  }
+
+  public getTopAnimes():void {
     const QUERY = gql`
     {
-      Page (perPage:8) {
+      Page (page:1 perPage:10) {
         media ( type: ANIME popularity_greater:276414 sort:POPULARITY_DESC status:FINISHED) {
           id
           title {
@@ -192,7 +197,7 @@ export class AnimeService {
     ).subscribe();
   }
 
-  obtenerAnime(id:number):Observable<Media>{
+  public getAnime(id:number):void{
     const QUERY = gql`
     {
       Media (id:${id}) {
@@ -226,16 +231,24 @@ export class AnimeService {
         popularity
         isAdult
         type
+        trailer{
+          id
+        }
       }
     }
     `;
-
-    return this.apollo.watchQuery<Data>({
+    this.apollo.watchQuery<Data>({
       query: QUERY
     }).valueChanges.pipe( 
-      map(({data}) => data.Media)
-    );
-    
+      map(({data}) => data.Media),
+      tap(media => this.parseMediaData(media))
+    ).subscribe();
   }
 
+  private parseMediaData(anime: Media):void {
+    const currentsFav = this.localStorageSvc.getFavorites();
+    const found = !!currentsFav.find((fav:Media)=> fav.id === anime.id);
+    const newData = {...anime, isFavorite:found}
+    this.animeSubject.next(newData);
+  }
 }

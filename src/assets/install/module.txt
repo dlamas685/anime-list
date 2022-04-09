@@ -7,3 +7,21 @@ ng add apollo-angular
 Pagination NG
 
 npm install ngx-pagination --save
+
+Infinite Scrolling NG
+
+npm i ngx-infinite-scroll
+
+Notificacion NG
+
+npm i ngx-toastr
+
+Animetion NG
+
+npm install @angular/animations --save
+
+DEPENDENCIAS
+
+apollo-angular
+ngx-pagination
+ngx-infinite-scroll

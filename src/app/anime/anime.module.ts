@@ -11,6 +11,9 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination'
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { BadgeGenresDirective } from './directive/badge-genres.directive';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 
 
@@ -22,7 +25,8 @@ import {NgxPaginationModule} from 'ngx-pagination'
     AnimeDetailComponent,
     AnimeFiltersComponent,
     AnimeCatalogComponent,
-    AnimeFavoritesComponent
+    AnimeFavoritesComponent,
+    BadgeGenresDirective
   ],
   exports: [
     HomeComponent,
@@ -34,7 +38,9 @@ import {NgxPaginationModule} from 'ngx-pagination'
     SharedModule,
     RouterModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    InfiniteScrollModule,
+    YouTubePlayerModule
   ]
 })
 export class AnimeModule { }

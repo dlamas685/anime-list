@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { AnimeModule } from './anime/anime.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,18 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(
+      {
+        timeOut: 1500,
+        closeButton:true,
+        progressBar:true,
+        easing:'ease-in',
+        positionClass: 'toast-bottom-right',
+        progressAnimation:'decreasing',
+        preventDuplicates: true,
+      }
+    ),
     AnimeModule,
     GraphQLModule,
     HttpClientModule

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, AfterViewInit, OnDestroy} from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Media } from '../../interfaces/anime';
 import { AnimeService } from '../../service/anime.service';
+import { LocalStorageService } from '../../service/local-storage.service';
 
 @Component({
   selector: 'app-anime-detail',
@@ -11,32 +13,28 @@ import { AnimeService } from '../../service/anime.service';
 })
 export class AnimeDetailComponent implements OnInit {
 
-  private _anime!:Media;
+  videoWidth: number = 560 ;
+  videoHeight: number = 315;
+  
+  constructor(
+    private animeSvc: AnimeService, 
+    private activatedRoute: ActivatedRoute,
+    private localStorageSvc: LocalStorageService,
+    ) {}
 
-  constructor(private animeService: AnimeService, private activatedRoute: ActivatedRoute) {
-
-
-   }
-
-  get anime():Media {
-    return this._anime;
+  get anime$():Observable<Media> {
+    return this.animeSvc.anime$;
   }
 
   ngOnInit(): void {
-      
-    this.activatedRoute.params
-    .pipe(
-      switchMap(({id}) => this.animeService.obtenerAnime(id))
-    )
-    .subscribe(
-     (resp:Media) => {
-       this._anime = resp;
-     }
-   );
+    const {id} =  this.activatedRoute.snapshot.params;
+    this.animeSvc.getAnime(id);
   }
 
-  agregarFavorito(anime:Media):void {
-     this.animeService.agregarFavorito(anime);
+  toggleFavorite(anime:Media):void {
+    const isFavorite = anime.isFavorite;
+    anime.isFavorite = !isFavorite;
+    this.localStorageSvc.addOrRemoveFevorite(anime);
   }
 
 }

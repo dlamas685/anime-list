@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AsideComponent } from './aside/aside.component';
 import { RouterModule } from '@angular/router';
+import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
 
 
 
@@ -11,12 +12,14 @@ import { RouterModule } from '@angular/router';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    AsideComponent
+    AsideComponent,
+    ScrollButtonComponent
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    AsideComponent
+    AsideComponent,
+    ScrollButtonComponent
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Media } from '../../interfaces/anime';
 import { AnimeService } from '../../service/anime.service';
+import { LocalStorageService } from '../../service/local-storage.service';
 
 @Component({
   selector: 'app-anime-catalog',
@@ -10,20 +11,24 @@ import { AnimeService } from '../../service/anime.service';
 })
 export class AnimeCatalogComponent implements OnInit {
 
-  private _resultado$ = new Observable<Media[]>();
+  private pageNum = 1;
 
-  p: number = 1;
-
-  get resultado$():Observable<Media[]>{
-      return this._resultado$;
+  get animes$():Observable<Media[]>{
+      return this.animeSvc.animes$;
   }
 
-  constructor(private animeService: AnimeService){
-      this._resultado$ = this.animeService.animesFiltrados$;
-  }
+  constructor(private animeSvc: AnimeService, private localStorageSvc: LocalStorageService){}
 
   ngOnInit() {    
-      this.animeService.filtrarAnimesPupolares();
+      this.animeSvc.getAnimesPopular();
   }
 
+  onScrollDown():void {
+    this.pageNum++;
+    this.animeSvc.getAnimePerPage(this.pageNum);
+  }
+
+  addToVisited(anime:Media){
+    this.localStorageSvc.addToVisited(anime);
+  }
 }

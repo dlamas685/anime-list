@@ -34,7 +34,7 @@ aside {
 }
 
 .popular ul li a:hover{
-	color: #8f8f8f;
+	color: #000;
 }
 
 .popular p{
@@ -72,7 +72,7 @@ aside {
 }
 
 .visited ul li a:hover{
-	color: #8f8f8f;
+	color: #000;
 }
 
 .visited p{

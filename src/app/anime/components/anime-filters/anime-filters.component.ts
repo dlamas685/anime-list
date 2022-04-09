@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Filter, MediaType } from '../../interfaces/anime';
+import { Filter, MediaType, MediaFormat } from '../../interfaces/anime';
 import { AnimeService } from '../../service/anime.service';
+import { LocalStorageService } from '../../service/local-storage.service';
 
 @Component({
   selector: 'app-anime-filters',
@@ -10,59 +11,64 @@ import { AnimeService } from '../../service/anime.service';
 })
 export class AnimeFiltersComponent implements OnInit {
 
-  miFiltros: FormGroup = this.fb.group({
-    search: [''],
-    genre: ['---'],
-    year: ['---']
+  myFilters: FormGroup = this.fb.group({
+    title: [''],
+    genre: [''],
+    seasonYear: [''],
+    format: ['TV']
   })
 
-  private _genders:string[] = ['Action', 'Adventure', 'Comedy', 'Drama', 'Ecchi', 'Fantasy', 'Horror', 'Mecha', 'Music','Sci-Fi', 'Slice of Life', 'Romance'];
+  private _genders:string[] = ['','Action', 'Adventure', 'Comedy', 'Drama', 
+  'Ecchi', 'Fantasy', 'Horror', 'Mahou Shoujo', 'Mecha', 'Music', 'Mystery',
+  'Psychological','Romance','Sci-Fi', 'Slice of Life','Sports','Supernatural','Thriller'];
 
-  private _years:number[] = [];
+  private _years:(number|string)[] = [];
+
+  private _formats:string[] = ['TV', 'Movie', 'TV_Short', 'Special', 'OVA', 'ONA', 'Music'];
 
   private filter:Filter = {};
 
-  constructor(private fb: FormBuilder, private animeService: AnimeService){}
+  constructor(private fb: FormBuilder, private animeSvc: AnimeService, private localStorageSvc: LocalStorageService){}
   
   ngOnInit(){
+    this._years.push('');
     for(let i:number=2022;i>=1990;i--){
       this._years.push(i);
     }
-    this.miFiltros.reset( {
-      search: '',
-      genre: '---',
-      year: '---'
-    });
+    this.resetForm();
   }
 
   get genders():string[] {
     return this._genders;
   }
 
-  get years():number[] {
+  get years():(number|string)[] {
     return this._years;
   }
 
-  public filtrarAnime():void{
-    if (this.miFiltros.controls['search'].value ==='' && this.miFiltros.controls['genre'].value === "---" && this.miFiltros.controls['year'].value === "---"){
-      return;
-    }
-    else {
-      if (this.miFiltros.controls['search'].value.trim().length != 0) {
-        this.filter.title = this.miFiltros.controls['search'].value;
-      }
-      if (this.miFiltros.controls['genre'].value != "---") {
-        this.filter.genre = this.miFiltros.controls['genre'].value;
-      }
-      if (this.miFiltros.controls['year'].value != "---") {
-        this.filter.seasonYear = this.miFiltros.controls['year'].value;
-      }
-      this.filter.type = MediaType.ANIME;
-      this.animeService.establecerParametros(this.filter);
-      this.animeService.establecerHistorial(this.filter);
-      this.animeService.filtrarAnimes();
-      this.filter = {};
-    }
+  get formats():string[] {
+    return this._formats;
+  }
 
+  public filterAnime():void{
+    this.filter = this.myFilters.value;
+    if (this.filter.title === '') this.filter.title = null;
+    if (this.filter.genre === '') this.filter.genre = null;
+    if (this.filter.seasonYear === '') this.filter.seasonYear = null;
+    if (this.filter.format === '') this.filter.format = null;
+
+    console.log(this.filter);
+    this.filter.type = MediaType.ANIME;
+    this.animeSvc.getAnimes(this.filter);
+    this.filter = {};
+  }
+
+  private resetForm():void {
+    this.myFilters.reset( {
+      title: '',
+      genre: '',
+      seasonYear: '',
+      format: 'TV'
+    });
   }
 }

@@ -15,6 +15,7 @@
 
 .article-image {
     width:35%;
+    position: relative; 
 }
 .anime {
     display:flex;
@@ -22,7 +23,6 @@
 }
 .article-info-anime {
     width:65%;
-    padding:30px 10px 0px 10px;
     font-family: 'Overpass';
     display:flex;
     flex-direction: column;
@@ -32,19 +32,14 @@
 .article-info-anime h3 {
     width:100%;
     font-size:16px;
-    display:flex;
     font-weight: bold;
-    padding:10px 0px 5px 0px;
 }
 
 .article-info-anime p {
     width:100%;
-    display:flex;
-    padding:10px 10px 5px 0px;
     font-size:16px;
-    flex-direction:column;
+    text-align: justify;
 }
-
 
 .banner img {
     width:100%;
@@ -58,35 +53,24 @@
 }
 
 .cover-img {
-    width:250px;
-    height: 256px;
-    display: inline-block;
-    padding: 10px 40px;
-    z-index: 1;
-    top:220px;
+    width:215px;
+    height:303px;
     position: absolute;
+    z-index: 1;
+    top:-35%;
+    left: 20%;
+}
+
+.image-favorite{
+    width:215px;
+    height:303px;
 }
 
 
 .btn-favorite{
-    border: none;
-    background:white;
-    font-size: 25px;
-    width:3%;
+    font-size: 14px;
     transition: transform 2s;
     transition:.2s;
-}
-
-.fa-icon {
-    color:#ff8000;
-}
-
-.fa-icon:hover {
-    color:rgb(133, 132, 132);
-}
-
-.fa-icon:active {
-    color:#ff8000;
 }
 
 
