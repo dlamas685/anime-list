@@ -12,9 +12,11 @@ const VISITED = 'visited'
 export class LocalStorageService {
 
   private animesFavoritesSubject = new BehaviorSubject<Media[]>([]);
+
   private _animesFavorites$ = this.animesFavoritesSubject.asObservable();
 
   private visitedSubject = new BehaviorSubject<Media[]>([]);
+  
   private _visited$ = this.visitedSubject.asObservable();
 
   get animesFavorites$(): Observable<Media[]> {
@@ -38,7 +40,6 @@ export class LocalStorageService {
     this.getFavorites();
   }
  
-
   public getFavorites():any{
     try {
       const mediasFavorites = JSON.parse(localStorage.getItem(FAVORITES)!);

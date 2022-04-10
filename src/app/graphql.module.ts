@@ -14,6 +14,9 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
         },
         MediaCoverImage: {
           keyFields: ["extraLarge"],
+        },
+        Page:{
+          keyFields: ["media"],
         }
       }
     }),

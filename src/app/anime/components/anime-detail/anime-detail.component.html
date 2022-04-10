@@ -2,7 +2,10 @@
     <section class="article-results animate__animated animate__faster animate__fadeIn"
         *ngIf="(anime$ | async) as anime">
         <div class="banner">
-            <img [src]="anime.bannerImage" alt="Banner del anime" title="Banner del anime">
+            <img [src]="anime.bannerImage" *ngIf="anime.bannerImage; else elseBlockBanner" alt="Banner del anime" title="Banner del anime">
+            <ng-template #elseBlockBanner>
+                <img src="../../../../assets/img/banner-defecto.png" alt="Banner del anime" title="Banner del anime">
+            </ng-template>
         </div>
         <div class="anime">
             <div class="article-image d-flex align-items-end">
@@ -14,7 +17,10 @@
             </div>
             <div class="article-info-anime pt-4 px-3">
                 <h3>{{anime.title.romaji}} - ({{anime.title.native}})</h3>
-                <p [innerHTML]="anime.description"></p>
+                <p [innerHTML]="anime.description" *ngIf="anime.description; else elseBlockDescription"></p>
+                <ng-template #elseBlockDescription>
+                    <p>No hay una descripcion para el anime</p>
+                </ng-template>
             </div>
         </div>
         <div class="px-2 d-flex pt-4">

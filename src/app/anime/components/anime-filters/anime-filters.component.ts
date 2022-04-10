@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Filter, MediaType, MediaFormat } from '../../interfaces/anime';
+import { Filter, MediaType, MediaFormat, MediaSort } from '../../interfaces/anime';
 import { AnimeService } from '../../service/anime.service';
 import { LocalStorageService } from '../../service/local-storage.service';
 
@@ -11,12 +11,9 @@ import { LocalStorageService } from '../../service/local-storage.service';
 })
 export class AnimeFiltersComponent implements OnInit {
 
-  myFilters: FormGroup = this.fb.group({
-    title: [''],
-    genre: [''],
-    seasonYear: [''],
-    format: ['TV']
-  })
+  myFilters!: FormGroup;
+
+  order:string = '';
 
   private _genders:string[] = ['','Action', 'Adventure', 'Comedy', 'Drama', 
   'Ecchi', 'Fantasy', 'Horror', 'Mahou Shoujo', 'Mecha', 'Music', 'Mystery',
@@ -25,18 +22,6 @@ export class AnimeFiltersComponent implements OnInit {
   private _years:(number|string)[] = [];
 
   private _formats:string[] = ['TV', 'Movie', 'TV_Short', 'Special', 'OVA', 'ONA', 'Music'];
-
-  private filter:Filter = {};
-
-  constructor(private fb: FormBuilder, private animeSvc: AnimeService, private localStorageSvc: LocalStorageService){}
-  
-  ngOnInit(){
-    this._years.push('');
-    for(let i:number=2022;i>=1990;i--){
-      this._years.push(i);
-    }
-    this.resetForm();
-  }
 
   get genders():string[] {
     return this._genders;
@@ -50,25 +35,53 @@ export class AnimeFiltersComponent implements OnInit {
     return this._formats;
   }
 
-  public filterAnime():void{
-    this.filter = this.myFilters.value;
-    if (this.filter.title === '') this.filter.title = null;
-    if (this.filter.genre === '') this.filter.genre = null;
-    if (this.filter.seasonYear === '') this.filter.seasonYear = null;
-    if (this.filter.format === '') this.filter.format = null;
-
-    console.log(this.filter);
-    this.filter.type = MediaType.ANIME;
-    this.animeSvc.getAnimes(this.filter);
-    this.filter = {};
+  get arrayFilter():(string|number)[] {
+    return [this.animeSvc.filter.title!, this.animeSvc.filter.genre!,this.animeSvc.filter.seasonYear!,this.animeSvc.filter.format! || 'TV'];
   }
 
-  private resetForm():void {
-    this.myFilters.reset( {
-      title: '',
-      genre: '',
-      seasonYear: '',
-      format: 'TV'
+  constructor(private fb: FormBuilder, private animeSvc: AnimeService, private localStorageSvc: LocalStorageService){
+    this.initialForm();
+  }
+  
+  ngOnInit(){
+    this._years.push('');
+    for(let i:number=2022;i>=1990;i--){
+      this._years.push(i);
+    }
+    this.orderPopularity();
+  }
+
+
+  public filterAnime():void{
+    let filter:Filter = this.myFilters.value;
+    if (filter.title === '') filter.title = null;
+    if (filter.genre === '') filter.genre = null;
+    if (filter.seasonYear === '') filter.seasonYear = null;
+    filter.type = MediaType.ANIME;
+    this.animeSvc.filter = filter;
+    this.animeSvc.getAnimes();
+  }
+
+
+  private initialForm():void{
+    const filter: Filter = this.animeSvc.filter;
+    this.myFilters =  this.fb.group({
+      title: [filter.title || ''],
+      genre: [filter.genre || ''],
+      seasonYear: [filter.seasonYear || ''],
+      format: [filter.format?.toString() || 'TV']
     });
+  }
+
+  public orderTitle():void {
+    this.order = 'Nombre'
+    this.animeSvc.sort = [MediaSort.TITLE_ROMAJI];
+    this.animeSvc.getAnimes();
+  }
+
+  public orderPopularity():void {
+    this.order = 'Popularidad'
+    this.animeSvc.sort = [MediaSort.POPULARITY_DESC];
+    this.animeSvc.getAnimes();
   }
 }

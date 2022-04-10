@@ -23,6 +23,8 @@
 }
 .article-info-anime {
     width:65%;
+    height:100%;
+    min-height: 30vh;
     font-family: 'Overpass';
     display:flex;
     flex-direction: column;

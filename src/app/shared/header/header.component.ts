@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Filter } from '../../anime/interfaces/anime';
 
 @Component({
   selector: 'app-header',
@@ -11,5 +12,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
 }

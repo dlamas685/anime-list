@@ -7,6 +7,7 @@ import { AccessDataComponent } from './components/access-data/access-data.compon
 import { SharedModule } from '../shared/shared.module';
 import { CheckInComponent } from './page/check-in/check-in.component';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,10 +19,16 @@ import { RouterModule } from '@angular/router';
     LogDataComponent,
     AccessDataComponent
   ],
+  exports: [
+    LogInComponent,
+    CheckInComponent,
+    UserConfigurationComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class UserModule { }

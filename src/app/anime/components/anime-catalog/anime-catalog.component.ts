@@ -20,7 +20,7 @@ export class AnimeCatalogComponent implements OnInit {
   constructor(private animeSvc: AnimeService, private localStorageSvc: LocalStorageService){}
 
   ngOnInit() {    
-      this.animeSvc.getAnimesPopular();
+    this.animeSvc.getAnimes();
   }
 
   onScrollDown():void {

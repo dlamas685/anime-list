@@ -45,14 +45,31 @@ export interface Media {
     bannerImage:     null | string;
     coverImage:      CoverImage;
     countryOfOrigin: string;
-    format:          string;
+    format:          MediaFormat;
     tags:            Tag[];
-    status:          string;
+    status:          MediaStatus;
     popularity:       number;
     isAdult:         boolean;
     type:            MediaType;
     isFavorite:      boolean;
     trailer:         MediaTrailer;
+}
+
+export enum MediaStatus {
+    FINISHED = 'FINISHED',
+    RELEASING = 'RELEASING',
+    NOT_YET_RELEASED = 'NOT_YET_RELEASED',
+    CANCELLED = 'CANCELLED',
+    HIATUS = 'HIATUS'
+}
+
+export enum MediaSort {
+    ID = 'ID',
+    ID_DESC = 'ID_DESC',
+    TITLE_ROMAJI = 'TITLE_ROMAJI',
+    TITLE_ROMAJI_DESC = 'TITLE_ROMAJI_DESC',
+    POPULARITY = 'POPULARITY',
+    POPULARITY_DESC = 'POPULARITY_DESC'
 }
 
 export interface MediaTrailer {

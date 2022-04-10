@@ -1,8 +1,9 @@
-<form class="filters container-sm bg-light float-left" (ngSubmit)="filterAnime()" [formGroup]="myFilters">
+<form class="filters container-sm bg-light float-left" [formGroup]="myFilters">
     <div class="f-search">
         <span>Buscar:</span>
         <div class="f-input-group">
-            <i class="fa-solid fa-magnifying-glass icon-input bg-white"></i><input type="text" placeholder="Buscar..." name="buscador" (keypress)="filterAnime()" formControlName="title">
+            <i class="fa-solid fa-magnifying-glass icon-input bg-white"></i><input type="text" placeholder="Buscar..."
+                name="buscador" autocomplete="off" (keyup)="filterAnime()" formControlName="title">
         </div>
     </div>
     <div class="f-dropdown">
@@ -21,10 +22,26 @@
     <div class="f-dropdown">
         <span>Formato:</span>
         <select name="dropdown-format" formControlName="format" (change)="filterAnime()">
-            <option *ngFor="let format of formats;" [value]="format | uppercase" [innerHTML]="format.replace('_',' ')"></option>
+            <option *ngFor="let format of formats;" [value]="format | uppercase" [innerHTML]="format.replace('_',' ')">
+            </option>
         </select>
     </div>
-    <!-- <div class="f-send">
-        <button type="submit" class="button btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
-    </div> -->
 </form>
+<div class="tags container-sm bg-light d-flex justify-content-start">
+    <span class="bg-light text-secondary fs-6 px-2"><i class="fa-solid fa-tags"></i></span>
+    <div *ngFor="let filter of arrayFilter">
+        <span class="badge bg-info text-light px-2 me-2" *ngIf="filter">{{filter}}</span>
+    </div>
+</div>
+<div class="container-sm d-flex pt-4 ps-2">
+    <div class="dropdown">
+        <button class="btn btn-outline-light text-secondary fs-6" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="fa-solid fa-sort"></i> {{order}}
+        </button>
+        <ul class="dropdown-menu bg-light shadow-sm rounded fs-6" aria-labelledby="dropdownMenu2">
+            <li><button class="dropdown-item  text-secondary" type="button" (click)="orderTitle()">Nombre</button></li>
+            <li><button class="dropdown-item  text-secondary" type="button" (click)="orderPopularity()">Popularidad</button></li>
+        </ul>
+    </div>
+</div>
