@@ -8,6 +8,9 @@ Pagination NG
 
 npm install ngx-pagination --save
 
+
+--------------------------------------------------------
+
 Infinite Scrolling NG
 
 npm i ngx-infinite-scroll
@@ -20,8 +23,7 @@ Animetion NG
 
 npm install @angular/animations --save
 
-DEPENDENCIAS
+Youtube Player NG
 
-apollo-angular
-ngx-pagination
-ngx-infinite-scroll
+npm install @angular/youtube-player
+
