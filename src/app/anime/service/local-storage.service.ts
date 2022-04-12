@@ -128,5 +128,4 @@ export class LocalStorageService {
       console.log('Error limpiando Local Storage:', e);
     }
   }
-
 }
