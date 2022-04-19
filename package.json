@@ -24,7 +24,7 @@
     "graphql": "^16",
     "ngx-infinite-scroll": "^13.0.1",
     "ngx-pagination": "^5.1.1",
-    "ngx-toastr": "^14.2.3",
+    "ngx-toastr": "^14.2.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -45,7 +45,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar:vertical{
-	width:6px;
+	width:10px;
 }
 
 body::-webkit-scrollbar-thumb {
