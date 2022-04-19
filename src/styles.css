@@ -1,34 +1,23 @@
 @font-face {
-	font-family: "Roboto";
-	src: url("./assets/fonts/Roboto/Roboto-Regular.ttf");
-  }
-
-  @font-face {
 	font-family: "Road Rage";
 	src: url("./assets/fonts/Road-Rage.otf");
-  }
+}
 
-  @font-face {
-	font-family: "Chantelli Antiqua";
-	src: url("./assets/fonts/Chantelli_Antiqua.ttf");
-  }
-
-  
-  @font-face {
+@font-face {
 	font-family: "Overpass";
 	src: url("./assets/fonts/Overpasss/Overpass-Regular.ttf");
-  }
+}
 
 
-  
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	
+
 }
 
-html{
+html {
 	scroll-behavior: smooth;
 }
 
@@ -39,6 +28,7 @@ body {
 	overflow: auto;
 }
 
+/* 
 
 body::-webkit-scrollbar {
 	-webkit-appearance: none;
@@ -51,63 +41,4 @@ body::-webkit-scrollbar:vertical{
 body::-webkit-scrollbar-thumb {
 	border-radius: 5px;
 	background: #ccc;
-}
-
-.bg-romance {
-  background: rgb(249, 148, 133);
-}
-
-.bg-music {
-	background: crimson;
-}
-
-.bg-slice-of-life {
-	background:beige ;
-	color:rgb(39, 38, 38);
-}
-
-.bg-ecchi {
-	background:lightcoral ;
-}
-
-.bg-drama {
-	background:#f8f9fa;
-	color: #000;
-}
-
-.bg-sports {
-	background:gold ;
-}
-
-.bg-supernatural {
-	background:lightgray ;
-	color:black;
-}
-
-.bg-thriller {
-	background: rgb(113, 65, 25);
-}
-
-.bg-mystery {
-	background: chocolate;
-}
-
-
-.bg-mahou-shoujo {
-	background: violet;
-}
-
-.bg-sci-fi {
-	background: aqua;
-}
-
-.bg-mecha {
-	background:cornflowerblue ;
-}
-
-.bg-horror {
-	background: darkslategray;
-}
-
-
-
+} */
