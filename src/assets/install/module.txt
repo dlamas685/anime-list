@@ -4,6 +4,8 @@ APOLLO
 
 ng add apollo-angular
 
+npm install apollo-angular @apollo/client graphql
+
 Pagination NG
 
 npm install ngx-pagination --save
