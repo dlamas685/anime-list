@@ -1,10 +1,11 @@
+//MODULOS
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+//COMPONENTES
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AsideComponent } from './aside/aside.component';
-import { RouterModule } from '@angular/router';
-import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
 
 
 
@@ -12,18 +13,15 @@ import { ScrollButtonComponent } from './scroll-button/scroll-button.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    AsideComponent,
-    ScrollButtonComponent
+    AsideComponent
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    AsideComponent,
-    ScrollButtonComponent
+    AsideComponent
   ],
   imports: [
-    CommonModule,
-    RouterModule
+    CommonModule
   ]
 })
 export class SharedModule { }

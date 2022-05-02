@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CheckInComponent } from './page/check-in/check-in.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserRoutingModule } from './user-routing.module';
 
 
 
@@ -26,9 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    SharedModule,
-    RouterModule,
-    ReactiveFormsModule
+    UserRoutingModule
   ]
 })
 export class UserModule { }

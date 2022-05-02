@@ -14,33 +14,33 @@ import {NgxPaginationModule} from 'ngx-pagination'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BadgeGenresDirective } from './directive/badge-genres.directive';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { CatalogComponent } from './page/catalog/catalog.component';
+import { AnimeRoutingModule } from './anime-routing.module';
+import { ScrollButtonComponent } from './components/scroll-button/scroll-button.component';
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    FavoritesComponent,
-    DetailComponent,
+    //COMPONENTES DEL MODULO
     AnimeDetailComponent,
     AnimeFiltersComponent,
     AnimeCatalogComponent,
     AnimeFavoritesComponent,
-    BadgeGenresDirective
-  ],
-  exports: [
+    ScrollButtonComponent,
+
+    //DIRECTIVAS DEL MODULO
+    BadgeGenresDirective,
+
+    //PAGINAS DEL MODULO
     HomeComponent,
     FavoritesComponent,
     DetailComponent,
+    CatalogComponent
   ],
   imports: [
     CommonModule,
-    SharedModule,
-    RouterModule,
-    ReactiveFormsModule,
-    NgxPaginationModule,
-    InfiniteScrollModule,
-    YouTubePlayerModule
+    AnimeRoutingModule
   ]
 })
 export class AnimeModule { }

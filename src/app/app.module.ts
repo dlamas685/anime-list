@@ -1,17 +1,21 @@
+
+//MODULOS
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AnimeModule } from './anime/anime.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserModule } from './user/user.module';
+
+//COMPONENTES
+import { AppComponent } from './app.component';
+import { NotFoundComponent } from './misc/page/not-found/not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +32,6 @@ import { UserModule } from './user/user.module';
         preventDuplicates: true,
       }
     ),
-    AnimeModule,
-    UserModule,
     GraphQLModule,
     HttpClientModule
   ],
