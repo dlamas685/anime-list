@@ -1,0 +1,49 @@
+.anime-sidebar {
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.anime-title {
+    color: #ff8000;
+    border-bottom: 1px solid #ff8000;
+    font-size:1.2rem;
+    margin-bottom: 10px;
+}
+
+.anime-sidebar ul {
+    list-style: none;
+}
+
+.anime-sidebar ul li {
+    border-bottom: 1px dashed #8f8f8f;
+    padding: 10px 0;
+}
+
+.anime-sidebar ul li a {
+    color: #8f8f8f;
+    text-decoration: none;
+
+}
+
+.anime-sidebar ul li a:hover {
+    color: #000;
+}
+
+.anime-sidebar p {
+    line-height: 27px;
+}
+
+.anime-text-yellow {
+    color: gold;
+}
+
+.anime-text-orange {
+    color: #ff8000;
+}
+
+.anime-sidebar-link{
+    cursor: pointer;
+}
+
+

@@ -1,1 +1,35 @@
-<p>catalog works!</p>
+<section class="filters" *ngIf="years.length > 0">
+    <app-search-input class="anime-search"></app-search-input>
+    <app-filter-select class="anime-dropdown" [dropdown_items]="genders" dropdown_name="Generos"></app-filter-select>
+    <app-filter-select class="anime-dropdown" [dropdown_items]="years" dropdown_name="Año"></app-filter-select>
+    <app-filter-select class="anime-dropdown" [dropdown_items]="formats" dropdown_name="Formato"></app-filter-select>
+    <div class="tags">
+        <i class="fa-solid fa-tags anime-icon-text"></i>
+        <span class="badge bg-info anime-badge-text">filtro</span>
+    </div>
+    <div class="dropdown-order">
+        <button class="btn-anime-order" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="fa-solid fa-sort anime-icon-text"></i><span class="anime-icon-text ms-2">Nombre</span>
+        </button>
+        <ul class="dropdown-menu shadow-sm rounded dropdown-anime-order">
+            <li><button class="dropdown-item btn-anime-order" type="button">Nombre</button></li>
+            <li><button class="dropdown-item btn-anime-order" type="button">Popularidad</button></li>
+        </ul>
+    </div>
+</section>
+<section class="catalog" *ngIf="(animes$ | async)?.length; else elseBlock" infiniteScroll (scrolled)="onScrollDown()">
+    <h2 class="section-title">Resultados de la busqueda</h2>
+    <section class="results" name="results" *ngIf="(animes$ | async) as animes">
+        <article *ngFor="let anime of animes">
+            <a>
+                <img src="{{anime.coverImage.extraLarge}}" class="animate__animated animate__fadeIn animate__slow shadow-lg rounded"
+                    alt="Portada del anime" tittle="Portada">
+            </a>
+            <h3 class="animate__animated animate__bounceIn animate__fast text-secondary fs-6 fw-normal">{{anime.title.romaji | titlecase}}</h3>
+        </article>
+    </section>
+</section>
+<ng-template #elseBlock>
+    <h2 class="section-title">No se encontro ningun resultado</h2>
+</ng-template>

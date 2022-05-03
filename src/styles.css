@@ -8,23 +8,35 @@
 	src: url("./assets/fonts/Overpasss/Overpass-Regular.ttf");
 }
 
+/*
+Unidades Relativas
+	px - pixel
+	em - Relativa al tamaño de fuente que tenga su elemento padre o el mas cercano
+	rem - Relativa al tamaño de fuente especificado en el html.
+	% - porcentaje
 
+Unidades Abosultas
+	Estas medidas nunca las vas a usar en el diseño web, pero aqui estan para que las conozcas
+	in - inches (pulgadas)
+	cm - centimetros
+	mm - milimetros
+*/
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-
+	font-size: 14px;
 }
 
 html {
 	scroll-behavior: smooth;
+	font-size: 14px;
 }
 
 body {
 	font-family: 'Overpass', sans-serif;
-	font-size: 16px;
-	background: #f8f9fa;
+	background: #E9ECF4;
 	overflow: auto;
 }
 

@@ -1,0 +1,74 @@
+.anime-info {
+    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.anime-links {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.anime-img-logo {
+    width: 40px;
+    margin-left: 10px;
+}
+
+.anime-animation-rotate {
+    animation: rotate-logo infinite 30s linear;
+}
+
+@keyframes rotate-logo {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.anime-text-logo {
+    font-family: 'Road Rage';
+    font-size: 2rem;
+    margin-left: 10px;
+}
+
+
+
+.anime-link {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.14rem;
+    color: #ccc;
+    cursor: pointer;
+    text-decoration: none;
+    background-size: 0% 2px;
+    transition: background-size 0.3s;
+}
+
+.anime-link:hover,
+.anime-link:active {
+  color: #ff8000
+}
+
+.anime-link:after {
+  content: "";
+  display: block;
+  margin: auto;
+  height: 2px;
+  margin-top: 2px;
+  width: 0px;
+  transition: all 0.4s;
+}
+
+.anime-link:hover:after,
+.anime-link:active:after {
+  width: 100%;
+  background: #ff8000;
+}
+
+.anime-icon {
+    font-size: 1.14rem;
+}

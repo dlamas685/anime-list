@@ -1,0 +1,46 @@
+span{
+    text-align:left;
+    display:flex;
+    padding:5px 0px 5px 0px;
+    color:rgb(133, 132, 132);
+    font-weight:bold;
+    font-size:1.1rem;
+}
+
+input {
+    display: inline;
+    border: 1px solid #ccc;
+    padding:10px;
+    font-size: 1rem;
+    height:30px;
+    width: 100%;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: 0px;
+    transition:.2s;
+    background: #E9ECF4;
+}
+
+input:focus{
+    outline:none; 
+    outline-width: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border:1px solid #ff8000;
+}
+
+.anime-icon-input{
+    height:30px;
+    padding:6px;
+    color:rgb(133, 132, 132);
+    border: 1px solid #ccc;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right: 0px;
+}
+
+.anime-input-group{
+    display:flex;
+    align-items:center;
+}

@@ -1,0 +1,4 @@
+<span>{{dropdown_name}}:</span>
+<select [name]= "dropdown_name" [(ngModel)]="dropdown_value" (change)="filterAnime()" > 
+    <option *ngFor="let item of dropdown_items;" [value]="item">{{item}}</option>
+</select>

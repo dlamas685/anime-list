@@ -9,38 +9,47 @@ import { AnimeCatalogComponent } from './components/anime-catalog/anime-catalog.
 import { AnimeFavoritesComponent } from './components/anime-favorites/anime-favorites.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import {NgxPaginationModule} from 'ngx-pagination'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BadgeGenresDirective } from './directive/badge-genres.directive';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { CatalogComponent } from './page/catalog/catalog.component';
 import { AnimeRoutingModule } from './anime-routing.module';
 import { ScrollButtonComponent } from './components/scroll-button/scroll-button.component';
+import { FilterSelectComponent } from './components/filter-select/filter-select.component';
+import { SearchInputComponent } from './components/search-input/search-input.component';
 
 
 
 @NgModule({
   declarations: [
+    //PAGINAS DEL MODULO
+    HomeComponent,
+    FavoritesComponent,
+    DetailComponent,
+    CatalogComponent,
+
+    
+    //DIRECTIVAS DEL MODULO
+    BadgeGenresDirective,
+
     //COMPONENTES DEL MODULO
     AnimeDetailComponent,
     AnimeFiltersComponent,
     AnimeCatalogComponent,
     AnimeFavoritesComponent,
     ScrollButtonComponent,
-
-    //DIRECTIVAS DEL MODULO
-    BadgeGenresDirective,
-
-    //PAGINAS DEL MODULO
-    HomeComponent,
-    FavoritesComponent,
-    DetailComponent,
-    CatalogComponent
+    FilterSelectComponent,
+    SearchInputComponent,
   ],
   imports: [
     CommonModule,
-    AnimeRoutingModule
+    AnimeRoutingModule,
+    SharedModule,
+    FormsModule,
+    InfiniteScrollModule,
+    NgxPaginationModule
   ]
 })
 export class AnimeModule { }

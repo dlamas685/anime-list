@@ -12,20 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AsideComponent implements OnInit {
 
-  constructor(private animeSvc: AnimeService, 
-    private activatedRoute: ActivatedRoute,
-    private localStorageSvc: LocalStorageService){}
+  constructor(){}
   
   ngOnInit() {
-      this.animeSvc.getTopAnimes();
   }
   
-  get populares$(): Observable<Media[]> {
-      return this.animeSvc.populares$;
-  }
-
-  get visited$(): Observable<Media[]> {
-    return this.localStorageSvc.visited$;
-  }
 
 }

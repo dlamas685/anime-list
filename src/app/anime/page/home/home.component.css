@@ -1,35 +1,35 @@
-.container {
-    background: rgb(237, 236, 236);
+.anime-content {
+    background: #E9ECF4;
     display:grid;
     gap:20px;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(4,auto);
-    grid-template-areas: "header header header"
-                         "filters filters sidebar"
-                         "catalog catalog sidebar"
-                         "footer footer footer";
+    grid-template-columns: repeat(6,1fr);
+    grid-template-rows: repeat(3,auto);
+    grid-template-areas: "header header header header header header"
+                         "main main main main sidebar sidebar"
+                         "footer footer footer footer footer footer";
 }
 
 .header {
-    background:#161f26;
-    color:#fff;
     grid-area: header;
     min-height: 70px;
-}
-
-.filters {
-    grid-area: filters;
+    display: flex;
+    background: #161f26;
+    color: #ccc;
+    padding:12px;
 }
 
 .sidebar {
     grid-area:sidebar;
-    background:#fff;
-    border-radius: 5px;
-
+    padding: 0px 15px 0px 0px;
+    display: flex;
+    flex-direction: column;
 }
 
-.catalog {
-    grid-area: catalog;
+.anime-main {
+    grid-area: main;
+    display:flex;
+    flex-flow: row wrap;
+    padding:15px;
 }
 
 .footer {
@@ -40,12 +40,75 @@
 }
 
 
-@media screen and (max-width:760px) {
-    .container {
-        grid-template-areas: "header header header"
-        "filters filters filters"
-        "catalog catalog catalog"
-        "sidebar sidebar sidebar"
-        "footer footer footer";
+@media screen and (max-width:1400px) {
+    .anime-content {
+        grid-template-areas: "header header header header header header header"
+        "l l l main sidebar r"
+        "footer footer footer footer footer footer footer";
     }
 }
+
+@media screen and (max-width:1200px) {
+    .anime-content {
+        grid-template-areas: "header header header header header header"
+        "main main main main sidebar sidebar"
+        "footer footer footer footer footer footer";
+    }
+}
+
+@media screen and (max-width:992px) {
+    .anime-content {
+        grid-template-areas: "header header header header header header"
+        "main main main main sidebar sidebar"
+        "footer footer footer footer footer footer";
+    }
+}
+
+/* PARA ESTA RESOLUCION DEFINIR IMAGENES TAMBIEN */
+
+@media screen and (max-width:768px) {
+    .anime-content {
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(4,auto);
+        grid-template-areas: "header header header"
+        "sidebar sidebar sidebar"
+        "main main main"
+        "footer footer footer";
+    }
+    .sidebar {
+        padding: 0px 15px;
+        display: flex;
+        grid-gap:20px;
+        flex-direction: row;
+        justify-content:space-evenly;
+    }
+}
+
+
+/* PARA ESTA RESOLUCION DEFINIR HEADER, SPAN RESULTADO Y SIDEBAR - BUSQUEDAS */
+@media screen and (max-width:576px) {
+    .anime-content {
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(4,auto);
+        grid-template-areas: "header header header"
+        "sidebar sidebar sidebar"
+        "main main main"
+        "footer footer footer";
+    }
+    .sidebar {
+        padding: 0px 15px;
+        display: flex;
+        grid-gap:20px;
+        flex-direction: row;
+        justify-content:space-evenly;
+    }
+}
+
+
+
+
+
+
+
+
+

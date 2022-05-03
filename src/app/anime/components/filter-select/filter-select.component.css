@@ -1,0 +1,32 @@
+select {
+    border: 1px solid #ccc;
+    padding:0px 10px;
+    font-size: 1rem;
+    height:30px;
+    width: 100%;
+    border-radius:5px;
+    transition:.2s;
+    background: #E9ECF4;
+}
+
+span{
+    text-align:left;
+    display:flex;
+    padding:5px 0px 5px 0px;
+    color:rgb(133, 132, 132);
+    font-weight:bold;
+    font-size:1.1rem;
+}
+
+select:focus{
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border:1px solid #ff8000;
+}
+
+option:hover {
+    background:#ff8000;
+}
